@@ -14,23 +14,29 @@ function App() {
       <Container>
         <Jumbotron fluid>
           <Container>
-            <p style={styles.heading}>Note List</p>
+            <p style={styles.heading}>Rasmus Södergrens</p>
+            <h1 style={styles.heading}>Note List</h1>
           </Container>
         </Jumbotron>
         <br />
         <Row style={styles.marginT}>
-          <Col style={styles.marginT} xs={12} md={4} lg={4}>
-            <List></List>
-          </Col>
-          <Col xs={12} md={8} lg={8}>
+          <Col xs={12} md={8} lg={12}>
             <Form>
               <br />
-              <Form.Control type="text" placeholder="Title" />
+              <Form.Control type="text" placeholder="note title" />
               <br />
-              <Form.Control as="textarea" size="sm" type="text" placeholder="Body text" rows={3} />
+              <Form.Control as="textarea" size="sm" type="text" placeholder="Body note" rows={3} />
             </Form>
-            <Button variant="primary">New note</Button> <Button variant="success">Save</Button>{' '}
-            <Button variant="danger">Delete</Button>{' '}
+            <Button variant="primary">Add Note</Button>
+            <Button style={styles.btnpadding} variant="success">
+              Save
+            </Button>
+            <Button style={styles.btnpadding} variant="danger">
+              Delete
+            </Button>{' '}
+          </Col>
+          <Col style={styles.marginT} xs={12} md={4} lg={12}>
+            <List></List>
           </Col>
         </Row>
       </Container>
@@ -43,8 +49,12 @@ export default App
 const styles = {
   heading: {
     fontSize: 50,
+    textAlign: 'Center',
   },
   marginT: {
     marginTop: 22,
+  },
+  btnpadding: {
+    marginLeft: 10,
   },
 }
