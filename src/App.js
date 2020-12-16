@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <Container>
-        <Jumbotron fluid>
+        <Jumbotron fluid style={styles.jumbotronColor}>
           <Container>
             <p style={styles.heading}>Rasmus Södergrens</p>
             <h1 style={styles.heading}>Note List</h1>
@@ -54,6 +54,10 @@ function App() {
 export default App
 
 const styles = {
+  jumbotronColor: {
+    backgroundColor: 'lightblue',
+  },
+
   heading: {
     fontSize: 50,
     textAlign: 'Center',
