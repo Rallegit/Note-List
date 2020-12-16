@@ -1,14 +1,31 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+import List from './components/List'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import Form from './components/Form'
 import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import List from './components/List'
+import {getNotes} from './utils/noteHelpers'
 
 function App() {
+  const [selectedNote, setSelectedNote] = useState(undefined)
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+    const notes = getNotes()
+    setNotes(notes)
+  }, [])
+
+  const refreshList = () => {
+    setSelectedNote(undefined)
+    const notes = getNotes()
+    setNotes([...notes])
+  }
+
+  const onClickNewNote = () => setSelectedNote(undefined)
+
   return (
     <div className="App">
       <Container>
@@ -18,25 +35,15 @@ function App() {
             <h1 style={styles.heading}>Note List</h1>
           </Container>
         </Jumbotron>
+        <Button onClick={onClickNewNote} className="mb-4" size="lg" variant="dark" block>
+          New Note
+        </Button>
         <br />
+        <Form refreshList={refreshList} selectedNote={selectedNote} />
         <Row style={styles.marginT}>
-          <Col xs={12} md={8} lg={12}>
-            <Form>
-              <br />
-              <Form.Control type="text" placeholder="note title" />
-              <br />
-              <Form.Control as="textarea" size="sm" type="text" placeholder="Body note" rows={3} />
-            </Form>
-            <Button variant="primary">Add Note</Button>
-            <Button style={styles.btnpadding} variant="success">
-              Save
-            </Button>
-            <Button style={styles.btnpadding} variant="danger">
-              Delete
-            </Button>{' '}
-          </Col>
+          <Col xs={12} md={8} lg={12}></Col>
           <Col style={styles.marginT} xs={12} md={4} lg={12}>
-            <List></List>
+            <List notes={notes} selectedNote={selectedNote} setSelectedNote={setSelectedNote} />
           </Col>
         </Row>
       </Container>
